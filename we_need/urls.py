@@ -31,5 +31,7 @@ urlpatterns = [
     # path('needs/<int:need_id>/', views.as_view(),name="needs-view"),
     # path('needs/<int:need_id>/create/', views.as_view(),name="needs-create"),
     # path('needs/<int:need_id>/update/', views.as_view(),name="needs-update"),
-] 
-# + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+    path('test/', views.test_view, name="test"),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
