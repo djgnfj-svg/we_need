@@ -1,0 +1,27 @@
+{% extends "account_base.html %}
+{% load static %}
+
+{% block title %}로그인 / 회원가입 폼 템플릿{% endblock %}
+
+{% block contents %}
+{% csrf_token %}
+<form id="login" action="" class="input-group-adon" method="post">
+<div id="main_content">
+    <div class="mb-3 row" id="user_info">
+        <div class="mb-1">
+            <label for="staticEmail" style="font-weight: bold; font-size: 18px; ">이메일</label>
+        </div>
+        <div>
+            {{ login_form.email }}
+        </div>
+        <div class="mb-1">
+            <label for="inputPassword" style="font-weight: bold; font-size: 18px;">패스워드</label>
+        </div>
+        <div>
+            {{ login_form.password }}
+        </div>
+    </div>
+</div>
+</form>
+
+{% endblock %}

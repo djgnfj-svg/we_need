@@ -16,7 +16,7 @@ class Categotise(TimeStampedModel):
 
 
 class Needs(TimeStampedModel):
-	main_img = models.ImageField(upload_to="image")
+	# main_img = models.ImageField(upload_to="image")
 	title = models.CharField(max_length=20, null=False)
 	description = models.TextField(null=False)
 	category = models.ForeignKey(Categotise, on_delete=models.CASCADE)

@@ -1,0 +1,37 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+  }
+  
+  
+  header {
+    /* background-color: #040D22; */
+    position: relative;
+  }
+  header .forms input.form-control {
+    color: white;
+    background-color: rgba(255,255,255,.15);
+    border-color: rgba(255,255,255,.3);
+  }
+  header .forms input.form-control::placeholder {
+    color: rgba(255,255,255,.6);
+  }
+
+  section.hero {
+    background-color: #040D22;
+    position: relative;
+    overflow: hidden;
+  }
+  section.hero .container {
+    padding-top: 160px;
+    padding-bottom: 160px;
+    position: relative;
+  }
+  section.hero .headline h1 {
+    font-size: 68px;
+    font-weight: 700;
+    letter-spacing: -2px;
+  }
+  section.hero .headline p {
+    font-size: 26px;
+  }

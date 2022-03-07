@@ -23,7 +23,6 @@ from needs import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home_view, name="home"),
-    # path('sign in/', views.as_view(),name="sign in"),
     # path('sign up/', views.as_view(),name="sign up"),
     # path('profile/', views.as_view(),name="profile"),
     # path('prpfile/update', views.as_view(),name="profile-update"),
