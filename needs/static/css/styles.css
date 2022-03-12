@@ -4,34 +4,91 @@
   } */
   
   
-  header {
-    /* background-color: #040D22; */
-    position: relative;
-  }
-  header .forms input.form-control {
-    color: white;
-    background-color: rgba(255,255,255,.15);
-    border-color: rgba(255,255,255,.3);
-  }
-  header .forms input.form-control::placeholder {
-    color: rgba(255,255,255,.6);
-  }
-
-  section.hero {
-    background-color: #040D22;
+  header.masthead {
     position: relative;
     overflow: hidden;
+    background-color: #040D22;
   }
-  section.hero .container {
+  header.masthead .container{
     padding-top: 160px;
     padding-bottom: 160px;
     position: relative;
   }
-  section.hero .headline h1 {
+  header.masthead .headline h1{
     font-size: 68px;
     font-weight: 700;
     letter-spacing: -2px;
   }
-  section.hero .headline p {
-    font-size: 26px;
+
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
   }
+  .card-body {
+    flex: 1 1 auto;
+    padding: 1rem 1rem;
+  }
+  .card-footer {
+    padding: 0.5rem 1rem;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+  }
+  .fw-bolder {
+    font-weight: bolder !important;
+  }
+  .py-5 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  body {
+    background-color: rgb(255, 255, 255);
+}
+
+/* 메인 컨텐트 */
+div#main_content {
+    width: 100%;
+    text-align: center;
+    margin-top: 5%;
+}
+
+a:link {
+    color: black;
+    text-decoration: none;
+}
+
+a:visited {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* 유저 정보(id,password) */
+div#user_info {
+    border: 1px solid black;
+    border-radius: 10px 10px 10px 10px;
+    position: relative;
+    width: 480px;
+    padding: 30px 10px 10px 10px;
+    display: inline-block;
+    text-align: left;
+}
+
+/* 로그인버튼 */
+button#login_button {
+    width: 90%;
+    height: 36.5px;
+    background-color: rgb(233, 101, 101);
+    border: 0px;
+    margin: 18px 0 10px 0;
+    padding: 5px 5px 5px 5px;
+}
