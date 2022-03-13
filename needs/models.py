@@ -20,7 +20,7 @@ class Category(TimeStampedModel):
 class Needs(TimeStampedModel):
 	title = models.CharField(max_length=20, null=False)
 	description = models.TextField(null=True)
-	categorys = models.ManyToManyField("needs.Category", null=True)
+	categorys = models.ManyToManyField("needs.Category", null=False)
 	creator = models.ForeignKey(MyUser,on_delete=models.CASCADE,null=True, related_name="creator")
 	like = models.ManyToManyField(MyUser, null=True,related_name="like")
 	like_count = models.PositiveIntegerField(default=0)

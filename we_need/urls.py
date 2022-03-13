@@ -17,14 +17,14 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from account.views import SignInView, logout_view
+from account.views import LoginView, logout_view
 
 from needs import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home_view, name="home"),
-    path('sign in/', SignInView.as_view(),name="sign-in"),
+    path('login/', LoginView.as_view(),name="login"),
     path('logout/', logout_view, name="logout"),
     # path('profile/', views.as_view(),name="profile"),
     # path('prpfile/update', views.as_view(),name="profile-update"),

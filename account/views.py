@@ -4,11 +4,14 @@ from django.views.generic import TemplateView, FormView, CreateView, ListView, D
 from account.models import MyUser, UserProfile
 from django.contrib.auth.models import User as U
 from django.contrib.auth import login, logout
+from django.views.decorators.csrf import csrf_exempt
+
+
 from . import form
 
 # Create your views here.
 class SignUpView(FormView):
-    template_name = 'pages/task_create.html'
+    template_name = 'pages/login.html'
     form_class = form.SignUpForm
     success_url = reverse_lazy('home')
     
@@ -23,14 +26,20 @@ class SignUpView(FormView):
 
         return super().form_valid(form)
         
-class SignInView(FormView):
-    template_name = 'pages/task_create.html'
+class LoginView(FormView):
+    template_name = 'pages/login.html'
     form_class = form.SignInForm
     success_url = reverse_lazy('home')
     
     def login(request, _user):
         login(request, _user)
         return redirect("home")
+
+    @csrf_exempt
+    def post(self, request):
+        print(request.POST.get("email"))
+        print(request.POST.get("password"))
+        return super().post(request)
 
 def logout_view(request):
     logout(request)
