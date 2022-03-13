@@ -1,0 +1,30 @@
+{% extends "needs_base.html" %}
+{% load static %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<form id="login" action="" class="input-group-adon" method="post">
+	{% csrf_token %}
+	<div id="main_content">
+		<div class="mb-3 row" id="user_info">
+			<div class="mb-1">
+				<label for="staticEmail" style="font-weight: bold; font-size: 18px; ">이메일</label>
+				<input type="text" id="input_filed" name="email">
+
+				<label for="inputPassword" style="font-weight: bold; font-size: 18px;">패스워드</label>
+				<input type="text" id="input_filed" name="password" class="width:;">
+
+				<label for="inputPassword" style="font-weight: bold; font-size: 18px;">패스워드 확인</label>
+				<input type="text" id="input_filed" name="password2" class="width:;">
+
+				<div style="margin-bottom: 3%;  ">
+					<a href="{% url 'login' %}" style="margin-bottom: 3%; color:blue; font-size: 15px; text-align: left;">  이미 회원이십니까? </a>
+				</div>
+
+				<button id="login_button">회원가입</button>
+			</div>
+		</div>
+	</div>
+</form>
+{% endblock %}

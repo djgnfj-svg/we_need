@@ -5,7 +5,7 @@ from django import forms
 from account.models import MyUser
 
 
-class SignUpForm(forms.Form):
+class RegisterForm(forms.Form):
     email = forms.EmailField(label='이메일',
                             error_messages={'invalid': '유효한 이메일 주소를 입력해주세요.'})
     password = forms.CharField(label='비밀번호',
@@ -19,7 +19,7 @@ class SignUpForm(forms.Form):
     profile_image = forms.ImageField(label='프로필 사진', required=False)
 
     def clean(self):
-        cleaned_data = super(SignUpForm, self).clean()
+        cleaned_data = super(RegisterForm, self).clean()
         password = cleaned_data.get('password')
         password_confirm = cleaned_data.get('password_confirm')
 

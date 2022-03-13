@@ -10,9 +10,9 @@ from django.views.decorators.csrf import csrf_exempt
 from . import form
 
 # Create your views here.
-class SignUpView(FormView):
-    template_name = 'pages/login.html'
-    form_class = form.SignUpForm
+class RegisterView(FormView):
+    template_name = 'pages/register.html'
+    form_class = form.RegisterForm
     success_url = reverse_lazy('home')
     
     def form_valid(self, form):
