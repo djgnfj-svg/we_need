@@ -19,21 +19,20 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from account.views import LoginView, RegisterView, logout_view
 
-from needs import views
+from needs.views import NeedsList, home_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home_view, name="home"),
+    path('', home_view, name="home"),
     path('login/', LoginView.as_view(),name="login"),
     path('register/', RegisterView.as_view(),name="register"),
     path('logout/', logout_view, name="logout"),
     # path('profile/', views.as_view(),name="profile"),
     # path('prpfile/update', views.as_view(),name="profile-update"),
-    # path('needs/', views.as_view(),name="needs-all"),
+    path('needs/', NeedsList.as_view(),name="needs-list"),
     # path('needs/<int:need_id>/', views.as_view(),name="needs-view"),
     # path('needs/<int:need_id>/create/', views.as_view(),name="needs-create"),
     # path('needs/<int:need_id>/update/', views.as_view(),name="needs-update"),
 
 
-    path('test/', views.test_view, name="test"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

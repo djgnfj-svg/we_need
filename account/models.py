@@ -42,8 +42,8 @@ class MyUser(AbstractBaseUser):
 		max_length=255,
 		unique=True,
 	)
-	full_name = models.CharField(
-		verbose_name='full_name',
+	nickname = models.CharField(
+		verbose_name='nick_name',
 		max_length=10,
 		blank=False,
 		unique=True,
@@ -57,9 +57,9 @@ class MyUser(AbstractBaseUser):
 	objects = MyUserManager()
 
 	USERNAME_FIELD = 'email'
-	REQUIRED_FIELDS = ['full_name']
+	REQUIRED_FIELDS = ['nick_name']
 
-	def get_full_name(self):
+	def get_nick_name(self):
 		# The user is identified by their email address
 		return self.email
 
