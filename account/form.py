@@ -1,10 +1,6 @@
 
 
 from django import forms
-from django.http import HttpResponse
-from django.shortcuts import render
-
-from account.models import MyUser
 from django.utils.translation import gettext_lazy as _
 
 class RegisterForm(forms.Form):
