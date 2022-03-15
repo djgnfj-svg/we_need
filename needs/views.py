@@ -1,7 +1,7 @@
-from django.shortcuts import get_object_or_404, render
-from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView
-
+from django.contrib import messages
 from needs.models import Needs
 from .forms import NeedsCreateForm
 # Create your views here.
@@ -21,13 +21,18 @@ class NeedsCreateView(CreateView):
 	success_url = reverse_lazy("home") # 나중에 작성이 성공하면 디테일 뷰로가야됨
 	login_url = reverse_lazy("login")
 
+	def post(self, request, *args, **kwargs):
+		needs = NeedsCreateForm(request.POST)
+		if needs.is_valid():
+			return super().post(request, *args, **kwargs)
+		else:
+			messages.warning(self.request, "잘못된입력이 있습니다.")
+			return redirect(reverse("needs-create"))
+
 	def form_valid(self, form):
 		data = form.save(commit=False)
 		data.creator_id = self.request.user.id
 		data.save()
-		print(self.request.POST)
-		print(self.kwargs[""])
-		print(self.request.user.id)
 		return super().form_valid(form)
 
 

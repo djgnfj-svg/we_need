@@ -59,22 +59,22 @@
   }
 
 </style>
-{% csrf_token %}
 <div id="all_area">
-	<form	m method="post" action="{% url 'needs-create' %}">
+  <form	m method="post" action="{% url 'needs-create' %}">
+    {% csrf_token %}
 		<div id="box">
-			<textarea cols="30" rows="5" placeholder="내용을 입력해주세요"></textarea>
+			<textarea name="title" cols="30" rows="5" placeholder="내용을 입력해주세요"></textarea>
 		</div>
 		<div id="select_box">
 			<!-- django for를 돌려했지만 selected -->
-		<select yname="DropDown" id="food">
+		<select id="food" name="categorys">
 			{% for value in form.categorys %}
 			{{value}}
 			{% endfor %}
 		</select>
 		</div>
 		<div id="content">
-			<textarea placeholder="당신의 바램을 적어주세요."></textarea>
+			<textarea name="description" placeholder="당신의 바램을 적어주세요."></textarea>
 		</div>
 		<div style="width: 95%;">
 			<button type="submit" id="button1">나가기</button>

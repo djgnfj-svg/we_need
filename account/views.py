@@ -5,12 +5,10 @@ from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.contrib import auth, messages
 from django.contrib.auth import login, logout
-from django.contrib.auth.models import User as U
 from django.contrib.auth.hashers import make_password
 from django.views.generic import FormView
-from django.views.decorators.csrf import csrf_exempt
 
-from account.models import MyUser, UserProfile
+from account.models import MyUser
 from . import form
 
 # Create your views here.

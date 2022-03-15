@@ -1,7 +1,11 @@
 
+from pyexpat import model
 from django import forms
 
+from needs.models import Needs
 
-class NeedsCreateForm(forms.Form):
-	def clean(self):
-			return super().clean()
+
+class NeedsCreateForm(forms.ModelForm):
+	class Meta:
+		model = Needs
+		fields = ["title", "description", "categorys"]
