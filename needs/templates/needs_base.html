@@ -29,7 +29,8 @@
 			</ui>
 				{% if user.is_active %}
 				<div class="nav-item">
-					<a class="nav-link btn btn-primary" href="{% url 'logout' %}">logout or profileutton</a>
+					<!-- <a class="btn btn-primary" href="{% url 'logout' %}">logout or profileutton</a> -->
+					<a class="btn btn-info" href="#">{{user.nickname}}</a>
 				</div>
 				{% else %}
 				<div class="nav-item">

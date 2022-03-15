@@ -9,10 +9,9 @@
 	<div id="main_content">
 		<div class="mb-3 row" id="user_info">
 			<div class="mb-1">
-				{% for error in form.errors.values %}
-					<!-- {{form.errors.values}} -->
+				<!-- {% for error in form.errors.values %} -->
 					{{ error }}
-				{% endfor %}
+				<!-- {% endfor %} -->
 				<label for="staticnickname" style="font-weight: bold; font-size: 18px; ">닉네임</label>
 				{{ form.nickname }}
 

@@ -10,11 +10,11 @@
         <div class="mb-3 row" id="user_info">
             <div class="mb-1">
                 <label for="staticEmail" style="font-weight: bold; font-size: 18px; ">이메일</label>
-                <input type="text" id="input_filed" name="email">
+                {{ form.email }}
 
                 <label for="inputPassword" style="font-weight: bold; font-size: 18px;">패스워드</label>
-
-                <input type="password" id="input_filed" name="password" class="width:;">
+                {{ form.password }}
+    
 				<div style="margin-bottom: auto;">
 					<a href="{% url 'register' %}" style="color:blue; font-size: 15px;"> 회원가입</a>
 				</div>

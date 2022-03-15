@@ -20,21 +20,20 @@ class RegisterView(FormView):
     success_url = reverse_lazy('home')
     
     def form_valid(self, form):
+        print("form_valid")
         nickname = form.cleaned_data['nickname']
         email = form.cleaned_data['email']
         password = make_password(form.cleaned_data['password'])
         # profile_image = form.cleaned_data['profile_image']
-        user = MyUser.objects.create(email=email, password=password, date_of_birth=timezone.now(), nickname=nickname)
         # UserProfile.objects.create(user=user,nickname=nickname,profile_image = profile_image)
+        user = MyUser.objects.create(email=email, password=password, date_of_birth=timezone.now(), nickname=nickname)
         login(self.request, user)
         return super().form_valid(form)
 
 
-
-
 class LoginView(FormView):
     template_name = 'pages/login.html'
-    form_class = form.SignInForm
+    form_class = form.LoginForm
     success_url = reverse_lazy('home')
     
     def form_valid(self, form):

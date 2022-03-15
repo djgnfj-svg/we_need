@@ -24,6 +24,7 @@ class RegisterForm(forms.Form):
     # profile_image = forms.ImageField(label='프로필 사진', required=False)
 
     def clean(self):
+        print("clean")
         cleaned_data = super(RegisterForm, self).clean()
         password = cleaned_data.get('password')
         password2 = cleaned_data.get('password2')
@@ -33,18 +34,11 @@ class RegisterForm(forms.Form):
 
         return cleaned_data
 
-class SignInForm(forms.Form):
-	class Meta:
-		model = MyUser
-		field=(
-			"email",
-			"password",
-		)
+class LoginForm(forms.Form):
+    email = forms.EmailField(label='이메일',
+                            error_messages={'invalid': '유효한 이메일 주소를 입력해주세요.'},
+                            widget=forms.EmailInput(attrs={"id" : "input_filed", "placeholder" : "abcd@efgh.com"}))
+    password = forms.CharField(label='비밀번호',
+                            min_length=6, max_length=20,
+                            widget=forms.PasswordInput(attrs={"id" : "input_filed", "placeholder" : "*********"}))
 
-	email = forms.EmailField(
-		max_length=100, required=False, widget=forms.EmailInput(attrs={"placeholder": "test1234@test.com"})
-	)
-	password = forms.CharField(
-		max_length=30, required=True, 
-		widget=forms.PasswordInput(attrs={})
-	)
