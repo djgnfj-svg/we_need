@@ -1,14 +1,8 @@
 {% extends "needs_base.html" %}
 {% load static %}
+{% load description_masker %}
 {% block content %}
 
-<!-- <section class="hero">
-    <div class="container">
-        <div class="headline">
-            <h1 class="text-white">당신의 불평불만을 적으세요</h1>
-        </div>
-    </div>
-</section> -->
 <header class="masthead">
     <div class="container">
         <div class="headline">
@@ -19,13 +13,18 @@
 <div class="container body-content">
     <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
+            <div style="display: flex;">
+                <h3 style="font-weight: bold;">인기</h3>
+                <a href="#" style="font-size: small; color: blue; margin-top: 15px;">더보기</a>
+            </div>
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                {% for need in needs %}
                 <div class="col mb-5">
                     <div class="card h-100">
                         <div class="card-body p-4">
                             <div class="text-center">
-                                <h5 class="fw-bolder">title</h5>
-                                discript
+                                <h5 class="fw-bolder">{{need.title}}</h5>
+                                {{need.description|DM}}
                             </div>
                         </div>
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
@@ -33,62 +32,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <h5 class="fw-bolder">title</h5>
-                                discript
-                            </div>
-                        </div>
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">자세히 보기</a></div>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>
 </div>
-<!-- <div class="container">
-    <div class="row justify-content-start" style="padding-top:10px;">
-        <h1>지금 핫한 니즈</h1>
-    </div>
-    <div class="row justify-content-start" style="padding-top:10px;">
-        <div class="col" style="padding-top:10px;">
-            <img alt="Image html" width="90%" height="90%" style="max-height:500px;max-width:500px;"
-                src="https://sketch2code.azurewebsites.net/Content/img/fake_img.svg" />
-        </div>
-        <div class="col" style="padding-top:10px;">
-            <img alt="Image html" width="90%" height="90%" style="max-height:500px;max-width:500px;"
-                src="https://sketch2code.azurewebsites.net/Content/img/fake_img.svg" />
-        </div>
-        <div class="col" style="padding-top:10px;">
-            <img alt="Image html" width="90%" height="90%" style="max-height:500px;max-width:500px;"
-                src="https://sketch2code.azurewebsites.net/Content/img/fake_img.svg" />
-        </div>
-    </div>
-    <div class="row justify-content-start" style="padding-top:10px;">
-        <div class="col" style="padding-top:10px;">
-            <h1>지금까지 완료된 니즈</h1>
-        </div>
-    </div>
-    <div class="row justify-content-start" style="padding-top:10px;">
-        <label></label>
-    </div>
-    <div class="row justify-content-start" style="padding-top:10px;">
-        <div class="col" style="padding-top:10px;">
-            <img alt="Image html" width="90%" height="90%" style="max-height:500px;max-width:500px;"
-                src="https://sketch2code.azurewebsites.net/Content/img/fake_img.svg" />
-        </div>
-        <div class="col" style="padding-top:10px;">
-            <img alt="Image html" width="90%" height="90%" style="max-height:500px;max-width:500px;"
-                src="https://sketch2code.azurewebsites.net/Content/img/fake_img.svg" />
-        </div>
-        <div class="col" style="padding-top:10px;">
-            <img alt="Image html" width="90%" height="90%" style="max-height:500px;max-width:500px;"
-                src="https://sketch2code.azurewebsites.net/Content/img/fake_img.svg" />
-        </div>
-    </div>
-</div> -->
 {% endblock %}

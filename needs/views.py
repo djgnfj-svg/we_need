@@ -7,8 +7,8 @@ from .forms import NeedsCreateForm
 # Create your views here.
 
 def home_view(request):
-	needs = Needs
-	return render(request, "pages/home.html")
+	needs = Needs.objects.order_by("created_at")
+	return render(request, "pages/home.html", {"needs" : needs})
 
 class NeedsListView(ListView):
 	model = Needs
@@ -39,3 +39,4 @@ class NeedsCreateView(CreateView):
 class NeedsList(ListView):
 	model = Needs
 	template_name = "pages/needs_list.html"
+	queryset = Needs.objects.order_by("created_at")
