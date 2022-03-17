@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DetailView
 from django.contrib import messages
 from needs.models import Needs
 from .forms import NeedsCreateForm
@@ -35,6 +35,10 @@ class NeedsCreateView(CreateView):
 		data.save()
 		return super().form_valid(form)
 
+class NeedsDetailView(DetailView):
+	model = Needs
+	template_name = "pages/needs_detail.html"
+	pk_url_kwarg = 'need_id'
 
 class NeedsList(ListView):
 	model = Needs

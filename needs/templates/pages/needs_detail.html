@@ -1,3 +1,80 @@
 {% extends "needs_base.html" %}
-{% block content %} 
+{% load category_name %}
+{% block content %}
+
+
+<style>
+	#all_area{
+		margin-left: 2%;
+	}
+  body{
+    background-color: white;
+  }
+  #box {
+		margin-top: 1%;
+	}
+  #box textarea{
+    width: 95%;
+    height: 80px;
+    border : 1px solid #a4a9af;
+    padding-top: 1rem;
+    padding-left: 30px;
+    border-radius: 0.5rem;
+		font-size: xx-large;
+    resize: none;
+  }
+  #content textarea{
+    width: 95%;
+    height: 500px;
+    border : 1px solid #a4a9af;
+    padding-top: 3.5rem;
+    padding-left: 30px;
+    border-radius: 0.5rem;
+    resize: none;
+  }
+  #food{
+    width: 110px;
+    height: 40px;
+    border : 1px solid #a4a9af;
+    border-radius: 0.4rem;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+ 
+  button{
+    width: 75px;
+    height: 30px;
+    margin-top: 15px;
+    border-radius: 0.4rem;
+    border : 1px solid #a4a9af;
+  }
+  #button1{
+    background-color: rgb(114, 114, 114);
+  }
+  #button2{
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+    -webkit-box-align: center;
+    align-items: center;
+		float: right;
+  }
+
+</style>
+<div id="all_area">
+  <div id="box">
+    <textarea name="title" cols="30" rows="5" placeholder="내용을 입력해주세요" disabled>{{object.title}}</textarea>
+  </div>
+  <div id="select_box">
+    <!-- django for를 돌려했지만 selected -->
+  <select id="food" name="categorys">
+    <option value="value">{{ object.categorys| category_name}}</option>}
+  </select>
+  </div>
+  <div id="content">
+    <textarea name="description" placeholder="당신의 바램을 적어주세요." disabled>{{object.description}}</textarea>
+  </div>
+  <div style="width: 95%;">
+    <button type="submit" id="button1"  onclick="location.href='/'" >나가기</button>
+  </div>
+</div>
 {% endblock %}

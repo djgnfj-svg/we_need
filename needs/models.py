@@ -24,7 +24,6 @@ class Needs(TimeStampedModel):
 
 	title = models.CharField(max_length=20, null=False)
 	description = models.TextField(null=True)
-	#이거 텍스트 초이스로 바꿔
 	categorys = models.CharField(
 		max_length=30,
 		choices=Categorys.choices,
