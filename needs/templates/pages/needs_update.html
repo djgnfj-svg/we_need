@@ -1,5 +1,4 @@
 {% extends "needs_base.html" %}
-{% load category_name %}
 {% block content %}
 
 
@@ -61,25 +60,28 @@
 
 </style>
 <div id="all_area">
-  <div id="box">
-    <textarea name="title" cols="30" rows="5" placeholder="내용을 입력해주세요" disabled>{{object.title}}</textarea>
-  </div>
-  <div id="select_box">
-    <!-- django for를 돌려했지만 selected -->
-  <select id="food" name="categorys">
-    <option value="value">{{ object.categorys| category_name}}</option>}
-  </select>
-  </div>
-  <div id="content">
-    <textarea name="description" placeholder="당신의 바램을 적어주세요." disabled>{{object.description}}</textarea>
-  </div>
-  <div style="width: 95%;">
-    <button type="submit" id="button1"  onclick="location.href='/'" >나가기</button>
-    {% if object.creator_id == request.user.id %}
-    <div id="button2">
-      <button type="submit" id="button2" onclick="location.href='/needs/{{object.id}}/update'">수정</button>
-    </div>
-    {% endif %}
-  </div>
+  <form	method="post" action="{% url 'needs-update' needs.id %}">
+    {% csrf_token %}
+		<div id="box">
+			<textarea name="title" cols="30" rows="5" placeholder="내용을 입력해주세요">{{needs.title}}</textarea>
+		</div>
+		<div id="select_box">
+			<!-- django for를 돌려했지만 selected -->
+		<select id="food" name="categorys">
+			{% for value in form.categorys %}
+			{{value}}
+			{% endfor %}
+		</select>
+		</div>
+		<div id="content">
+			<textarea name="description" placeholder="당신의 바램을 적어주세요.">{{needs.description}}</textarea>
+		</div>
+		<div style="width: 95%;">
+			<button type="button" id="button1" onclick="location.href='/'">나가기</button>
+			<div id="button2">
+				<button type="submit" id="button2">제출</button>
+			</div>
+		</div>
+	</form>
 </div>
 {% endblock %}
