@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from account.views import LoginView, RegisterView, logout_view
 
-from needs.views import NeedsCreateView, NeedsDetailView, NeedsList, NeedsUpdateView, home_view
+from needs.views import NeedsCreateView, NeedsDeleteView, NeedsDetailView, NeedsList, NeedsUpdateView, home_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,6 +33,7 @@ urlpatterns = [
     path('needs/create/', NeedsCreateView.as_view(),name="needs-create"),
     path('needs/<int:need_id>/', NeedsDetailView.as_view(),name="needs-detail"),
     path('needs/<int:need_id>/update/', NeedsUpdateView.as_view(),name="needs-update"),
-
+    path('needs/<int:need_id>/delete/', NeedsDeleteView.as_view(),name="needs-delete"),
+    # path('api/', include(needs_router.urls)),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -58,8 +58,33 @@
     align-items: center;
 		float: right;
   }
-
 </style>
+<script>
+    function reply_click(need_id) {
+    let str=need_id
+    var _delete = confirm("정말 삭제하시겟습니까?");
+
+    if(_delete){
+    $.ajax({
+      method: "DELETE",
+      url: "/needs/"+ str +"/delete/",
+      dataType: "json",
+      headers: {
+        'X-CSRFTOKEN': '{{ csrf_token }}'
+      },
+      success: function (json) {
+        alert("삭제 성공!");
+          reload();
+        },
+        error: function ( error ) {
+          alert(" error = " + error); // 실패 시 처리
+        },
+      });
+    }else{
+      alert("삭제 취소");
+    }
+    }
+</script>
 <div id="all_area">
   <div id="box">
     <textarea name="title" cols="30" rows="5" placeholder="내용을 입력해주세요" disabled>{{object.title}}</textarea>
@@ -78,6 +103,10 @@
     {% if object.creator_id == request.user.id %}
     <div id="button2">
       <button type="submit" id="button2" onclick="location.href='/needs/{{object.id}}/update'">수정</button>
+      <a href="{% url 'needs-delete'  object.id %}">
+        <button style="color: red;" id="button2">삭제</button>
+      </a>
+      <!-- <button type="submit" style="color: red;" id="button2" onclick="reply_click('{{object.id}}')">삭제</button> -->
     </div>
     {% endif %}
   </div>
