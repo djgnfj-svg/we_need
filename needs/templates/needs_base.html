@@ -29,7 +29,7 @@
 			</ui>
 				{% if user.is_active %}
 				<div class="nav-item">
-					<a class="btn btn-info " style="border-radius: 20%;" href="#">{{user.nickname}}</a>
+					<a class="btn btn-info " style="border-radius: 20%;" href="{% url 'profile' user.nickname %}">{{user.nickname}}</a>
 					<a class="btn btn-primary" href="{% url 'logout' %}">logout or profileutton</a>
 				</div>
 				{% else %}

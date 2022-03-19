@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from account.views import LoginView, RegisterView, logout_view
 
-from needs.views import NeedsCreateView, NeedsDeleteView, NeedsDetailView, NeedsList, NeedsUpdateView, home_view
+from needs.views import NeedsCreateView, NeedsDeleteView, NeedsDetailView, NeedsList, NeedsUpdateView, home_view, profile_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,7 +27,7 @@ urlpatterns = [
     path('login/', LoginView.as_view(),name="login"),
     path('register/', RegisterView.as_view(),name="register"),
     path('logout/', logout_view, name="logout"),
-    # path('profile/', views.as_view(),name="profile"),
+    path('profile/<str:nickname>', profile_view,name="profile"),
     # path('prpfile/update', views.as_view(),name="profile-update"),
     path('needs/', NeedsList.as_view(),name="needs-list"),
     path('needs/create/', NeedsCreateView.as_view(),name="needs-create"),

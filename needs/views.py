@@ -4,6 +4,7 @@ from django.views.generic import ListView, CreateView, DetailView, UpdateView, D
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
+from account.models import MyUser
 
 from needs.models import Needs
 from .forms import NeedsCreateForm
@@ -12,6 +13,11 @@ from .forms import NeedsCreateForm
 def home_view(request):
 	needs = Needs.objects.order_by("created_at")
 	return render(request, "pages/home.html", {"needs" : needs})
+
+def profile_view(request, nickname):
+	user_profile = MyUser.objects.filter(nickname = nickname)
+	return render(request, "pages/profile.html", {"user" : user_profile})
+
 
 class NeedsListView(ListView):
 	model = Needs
