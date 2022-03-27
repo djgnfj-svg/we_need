@@ -41,7 +41,7 @@ SECRET_KEY = get_secret("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -53,8 +53,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'account',
+    'django.contrib.sites',
     'needs',
+
+    #All auth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.auth0',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -103,7 +110,6 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
-AUTH_USER_MODEL = 'account.MyUser'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -156,3 +162,25 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# All auth
+SITE_ID = 2
+LOGIN_REDIRECT_URL = 'home'
+ACCOUNT_LOGOUT_REDIRECT_URL = 'home'
+ACCOUNT_LOGOUT_ON_GET = True # get으로 접근해도 로그아웃 할 수 있도록
+SOCIALACCOUNT_LOGIN_ON_GET = True
+
+SOCIALACCOUNT_PROVIDERSA = {
+	'google' : {
+        'SCOPE' : [
+            'profile', 'email'
+            ],
+        'AUTH_PARMS' :{
+            'access_type' : 'online',
+        }
+    }
+}
+# google 클라이언트 id
+# 484627095135-207ed9lsdf5ub3lham151ah5ccu3dsgr.apps.googleusercontent.com
+# google 클리이언트 보안 비밀번호
+# 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

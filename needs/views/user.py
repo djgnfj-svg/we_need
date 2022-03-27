@@ -1,20 +1,20 @@
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.contrib import auth, messages
 from django.contrib.auth import login, logout
 from django.contrib.auth.hashers import make_password
 from django.views.generic import FormView
 
-from account.models import MyUser
-from . import form
+from django.contrib.auth.models import User as U
+from .. import forms
 
 # Create your views here.
 class RegisterView(FormView):
     template_name = 'pages/register.html'
-    form_class = form.RegisterForm
+    form_class = forms.RegisterForm
     success_url = reverse_lazy('home')
     
     def form_valid(self, form):
@@ -24,14 +24,14 @@ class RegisterView(FormView):
         password = make_password(form.cleaned_data['password'])
         # profile_image = form.cleaned_data['profile_image']
         # UserProfile.objects.create(user=user,nickname=nickname,profile_image = profile_image)
-        user = MyUser.objects.create(email=email, password=password, date_of_birth=timezone.now(), nickname=nickname)
+        user = U.objects.create(email=email, password=password, username=nickname)
         login(self.request, user)
         return super().form_valid(form)
 
 
 class LoginView(FormView):
     template_name = 'pages/login.html'
-    form_class = form.LoginForm
+    form_class = forms.LoginForm
     success_url = reverse_lazy('home')
     
     def form_valid(self, form):

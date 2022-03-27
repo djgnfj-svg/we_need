@@ -1,9 +1,10 @@
 {% extends "needs_base.html" %}
 {% load static %}
-
+{% load socialaccount %}
 {% block title %}login{% endblock %}
 
 {% block content %}
+{% providers_media_js %}
 <form id="login" action="" class="input-group-adon" method="post">
     {% csrf_token %}
     <div id="main_content">
@@ -16,6 +17,7 @@
 				<div style="margin-bottom: auto;">
 					<a href="{% url 'register' %}" style="color:blue; font-size: 15px;"> 회원가입</a>
 				</div>
+                <a href="{% provider_login_url 'google' %}">구글로그인</a>
                 <button id="login_button">로그인</button>
             </div>
         </div>

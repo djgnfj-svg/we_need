@@ -1,6 +1,6 @@
 from django.db import models
-from account.models import MyUser
 from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import User as U
 # Create your models here.
 
 class TimeStampedModel(models.Model):
@@ -12,7 +12,7 @@ class TimeStampedModel(models.Model):
 
 # 카테고리가 있는 이유 -> 일단 분류를 하기 위해서인데 그러면 그걸 구지 카테고리로 하는 이유는??
 # 운영자 쪽에서 니즈의 분류를 파악하고 그부분을 추가해서 운영자 쪽에서 이상한 테그가 유행하는걸 방지할 수 있고
-# 
+# 생각해보니 이러면 운영자쪽에서 추가를 어케하니...?
 
 class Needs(TimeStampedModel):
 	class Categorys(models.TextChoices):
@@ -29,8 +29,8 @@ class Needs(TimeStampedModel):
 		choices=Categorys.choices,
 		default=Categorys.ETC,
 	)
-	creator = models.ForeignKey(MyUser,on_delete=models.CASCADE,null=True, related_name="creator")
-	like = models.ManyToManyField(MyUser, null=True,related_name="like")
+	creator = models.ForeignKey(U,on_delete=models.CASCADE,null=True, related_name="creator")
+	like = models.ManyToManyField(U, null=True)
 	like_count = models.PositiveIntegerField(default=0)
 
 	def __str__(self):
@@ -38,7 +38,7 @@ class Needs(TimeStampedModel):
 
 class Comment(TimeStampedModel):
 	need = models.ForeignKey(Needs, on_delete=models.CASCADE)
-	writer = models.ForeignKey(MyUser,on_delete=models.CASCADE,null=False)
+	writer = models.ForeignKey(U,on_delete=models.CASCADE,null=False)
 	parent = models.ForeignKey("self", on_delete=models.CASCADE, null=True)
 
 	content = models.CharField(max_length=300)

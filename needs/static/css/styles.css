@@ -96,6 +96,7 @@
   input#input_filed {
     height: 100%;
     width: 100%;
+    padding: 3px;
     border-radius: 0%;
     font-size: 20px;
     margin: 18px 0 10px 0;

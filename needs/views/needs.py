@@ -3,25 +3,30 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.exceptions import PermissionDenied
-from account.models import MyUser
+from django.contrib.auth.models import User as U
 
 from needs.models import Needs
-from .forms import NeedsCreateForm
+from ..forms import NeedsCreateForm
 # Create your views here.
 
 def home_view(request):
+	# needs = get_object_or_404(Needs.objects.order_by("created_at"))
 	needs = Needs.objects.order_by("created_at")
 	return render(request, "pages/home.html", {"needs" : needs})
 
 def profile_view(request, nickname):
-	user_profile = MyUser.objects.filter(nickname = nickname)
+	user_profile = U.objects.filter(nickname = nickname)
 	return render(request, "pages/profile.html", {"user" : user_profile})
 
 
 class NeedsListView(ListView):
 	model = Needs
 	template_name = 'pages/home'
+
+	def get(self, request, *args, **kwargs):
+		test = request.GET.get("test")
+		_needs = Needs.objects.order_by(category=test) # 이런식
+		return super().get(request, *args, **kwargs)
 
 class NeedsCreateView(LoginRequiredMixin, CreateView):
 	model = Needs

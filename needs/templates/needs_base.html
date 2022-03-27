@@ -21,16 +21,16 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #040D22;">
 		<div class="container-fluid">
 			<ui class="nav-item">
-				<a class="navbar-brand mb-0 h1" href="{% url 'home' %}">We_needs</a>
-				<a class="navbar-brand mb-1" href="{% url 'needs-list' %}">needs</a>
+				<a class="navbar-brand mb-0 h1" style="color: whitesmoke;" href="{% url 'home' %}">We_needs</a>
+				<a class="navbar-brand mb-1" style="color: whitesmoke;" href="{% url 'needs-list' %}">needs</a>
 			</ui>
 				{% if user.is_active %}
 				<div class="nav-item">
-					<a class="btn btn-info " style="border-radius: 20%;" href="{% url 'profile' user.nickname %}">{{user.nickname}}</a>
-					<a class="btn btn-primary" href="{% url 'logout' %}">logout or profileutton</a>
+					<a class="btn btn-info " style="border-radius: 5%;" href="{% url 'profile' user.username %}">{{user.username}}</a>
+					<a class="btn btn-primary" href="{% url 'logout' %}">logout</a>
 				</div>
 				{% else %}
 				<div class="nav-item">
