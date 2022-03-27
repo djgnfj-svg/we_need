@@ -17,8 +17,12 @@
 				<div style="margin-bottom: auto;">
 					<a href="{% url 'register' %}" style="color:blue; font-size: 15px;"> 회원가입</a>
 				</div>
-                <a href="{% provider_login_url 'google' %}">구글로그인</a>
+                <a href="{% provider_login_url 'google' %}">
+                    <img src="https://image.aladin.co.kr/img/login/w_login_g.jpg" alt="구글">
+                </a>
                 <button id="login_button">로그인</button>
+                <div class="g-signin2" data-width="300" data-height="200" data-longtitle="true">
+
             </div>
         </div>
     </div>
