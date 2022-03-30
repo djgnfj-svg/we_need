@@ -10,7 +10,7 @@ from needs.models import Needs
 class NeedsCreateForm(forms.ModelForm):
 	class Meta:
 		model = Needs
-		fields = ["title", "description", "categorys"]
+		fields = ["title", "description", "category"]
 
 class RegisterForm(forms.Form):
     nickname = forms.CharField(label='닉네임',

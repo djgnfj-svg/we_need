@@ -1,7 +1,10 @@
 from django.urls import path
 
+from rest_framework import routers
+
+from needs.api.views import NeedsViewsSet
 
 
-urlpatterns = [
-	path("needs",needs_view, name="api_needs")
-]
+
+router = routers.DefaultRouter()
+router.register(r'needs_list', NeedsViewsSet)

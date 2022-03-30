@@ -21,6 +21,7 @@ from django.contrib import admin
 from needs.views.needs import NeedsCreateView, NeedsDeleteView, NeedsDetailView, NeedsList, NeedsUpdateView, home_view, profile_view
 from needs.views.user import LoginView, RegisterView, logout_view
 
+from needs.api.urls import router
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_view, name="home"),
@@ -34,7 +35,7 @@ urlpatterns = [
     path('needs/<int:need_id>/', NeedsDetailView.as_view(),name="needs-detail"),
     path('needs/<int:need_id>/update/', NeedsUpdateView.as_view(),name="needs-update"),
     path('needs/<int:need_id>/delete/', NeedsDeleteView.as_view(),name="needs-delete"),
-    path('oauth/', include('allauth.urls'))
-    # path('api/', include(needs_router.urls)),
+    path('oauth/', include('allauth.urls')),
+    path('api/', include(router.urls)),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

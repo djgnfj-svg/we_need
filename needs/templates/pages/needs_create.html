@@ -67,9 +67,9 @@
 		</div>
 		<div id="select_box">
 			<!-- django for를 돌려했지만 selected -->
-		<select id="food" name="categorys">
-			{% for value in form.categorys %}
-			{{value}}
+		<select id="food" name="category">
+			{% for value in categories %}
+			<option>{{value.category_name}}</option>
 			{% endfor %}
 		</select>
 		</div>

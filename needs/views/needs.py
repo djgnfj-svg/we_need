@@ -1,11 +1,11 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView, TemplateView
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User as U
 
-from needs.models import Needs
+from needs.models import Categories, Needs
 from ..forms import NeedsCreateForm
 # Create your views here.
 
@@ -30,7 +30,7 @@ class NeedsListView(ListView):
 
 class NeedsCreateView(LoginRequiredMixin, CreateView):
 	model = Needs
-	fields = ['title', 'description', "categorys"]
+	fields = ['title', 'description', "category"]
 	template_name = 'pages/needs_create.html'
 	success_url = reverse_lazy("home") # 나중에 작성이 성공하면 디테일 뷰로가야됨
 	login_url = reverse_lazy("login")
@@ -56,7 +56,7 @@ class NeedsDetailView(DetailView):
 
 class NeedsUpdateView(UpdateView):
 	model = Needs
-	fields = ['title', 'description', "categorys", "id"]
+	fields = ['title', 'description', "category", "id"]
 	template_name = "pages/needs_update.html"
 	pk_url_kwarg = 'need_id'
 	success_url = reverse_lazy("needs-detail")
@@ -81,3 +81,15 @@ class NeedsList(ListView):
 	model = Needs
 	template_name = "pages/needs_list.html"
 	queryset = Needs.objects.order_by("created_at")
+
+
+class SearchView(TemplateView):
+	template_name = 'pages/esearch.html'
+
+	def get_context_data(self, **kwargs):
+		page_number = self.request.GET.get('page','1')
+		keyword = self.request.GET.get('keyword','')
+		category_id = self.request.GET.get("category")
+
+
+		return super().get_context_data(**kwargs)

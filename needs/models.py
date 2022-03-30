@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.core.validators import MinValueValidator
 from django.contrib.auth.models import User as U
 # Create your models here.
 
@@ -14,21 +15,19 @@ class TimeStampedModel(models.Model):
 # 운영자 쪽에서 니즈의 분류를 파악하고 그부분을 추가해서 운영자 쪽에서 이상한 테그가 유행하는걸 방지할 수 있고
 # 생각해보니 이러면 운영자쪽에서 추가를 어케하니...?
 
+class Categories(models.Model):
+	category_name = models.CharField(max_length=20, validators=[MinValueValidator(2)])
+
 class Needs(TimeStampedModel):
-	class Categorys(models.TextChoices):
-		POLITICS = "Politics", _("정치")
-		SOCIETY = "Society", _("사회") 
-		PERSON = "person", _("사람") 
-		INDIVIDAUL = "individual", _("개인") 
-		ETC = "etc", _("기타") 
 
 	title = models.CharField(max_length=20, null=False)
 	description = models.TextField(null=True)
-	categorys = models.CharField(
-		max_length=30,
-		choices=Categorys.choices,
-		default=Categorys.ETC,
-	)
+	category = models.ForeignKey(Categories, on_delete=models.CASCADE, null=True)
+	# categorys = models.CharField(
+	# 	max_length=30,
+	# 	choices=Categorys.choices,
+	# 	default=Categorys.ETC,
+	# )
 	creator = models.ForeignKey(U,on_delete=models.CASCADE,null=True, related_name="creator")
 	like = models.ManyToManyField(U, null=True)
 	like_count = models.PositiveIntegerField(default=0)
