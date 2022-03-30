@@ -4,6 +4,8 @@ from django.views.generic import ListView, CreateView, DetailView, UpdateView, D
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User as U
+from django.core.paginator import Paginator
+from django.db.models import Q
 
 from needs.models import Categories, Needs
 from ..forms import NeedsCreateForm
@@ -79,12 +81,26 @@ class NeedsList(ListView):
 
 
 class SearchView(TemplateView):
-	template_name = 'pages/search.html'
+	template_name = 'need/search.html'
 
 	def get_context_data(self, **kwargs):
 		page_number = self.request.GET.get('page','1')
 		keyword = self.request.GET.get('keyword','')
 		category_id = self.request.GET.get("category")
 
+		query_sets = Needs.objects.all().order_by("-created_at")
+		if keyword:
+			query_sets = query_sets.filter(Q(title__istartswith=keyword) | Q(description__istartswith=keyword))
+		if category_id:
+			category = get_object_or_404(Categories, id=int(category_id))
+			query_sets = query_sets.filter(category=category)
+		
+		needs = query_sets.all()
+		paginator = Paginator(needs, 12)
+		categories = Categories.objects.all()
 
-		return super().get_context_data(**kwargs)
+		paging = paginator.get_page(page_number)
+		return {
+			'paging' : paging,
+			'categories' : categories,
+		}
