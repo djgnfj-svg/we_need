@@ -18,8 +18,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 
-from needs.views.needs import NeedsCreateView, NeedsDeleteView, NeedsDetailView, NeedsList, NeedsUpdateView, home_view, profile_view
-from needs.views.user import LoginView, RegisterView, logout_view
+from needs.views.needs import NeedsCreateView, NeedsDeleteView, NeedsDetailView, NeedsList, NeedsUpdateView, home_view
+from needs.views.user import LoginView, RegisterView, logout_view, profile_view
 
 from needs.api.urls import router
 urlpatterns = [

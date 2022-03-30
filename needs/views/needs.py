@@ -12,16 +12,11 @@ from ..forms import NeedsCreateForm
 def home_view(request):
 	# needs = get_object_or_404(Needs.objects.order_by("created_at"))
 	needs = Needs.objects.order_by("created_at")
-	return render(request, "pages/home.html", {"needs" : needs})
-
-def profile_view(request, nickname):
-	user_profile = U.objects.filter(nickname = nickname)
-	return render(request, "pages/profile.html", {"user" : user_profile})
-
+	return render(request, "main/home.html", {"needs" : needs})
 
 class NeedsListView(ListView):
 	model = Needs
-	template_name = 'pages/home'
+	template_name = 'main/home'
 
 	def get(self, request, *args, **kwargs):
 		test = request.GET.get("test")
@@ -31,7 +26,7 @@ class NeedsListView(ListView):
 class NeedsCreateView(LoginRequiredMixin, CreateView):
 	model = Needs
 	fields = ['title', 'description', "category"]
-	template_name = 'pages/needs_create.html'
+	template_name = 'need/needs_create.html'
 	success_url = reverse_lazy("home") # 나중에 작성이 성공하면 디테일 뷰로가야됨
 	login_url = reverse_lazy("login")
 
@@ -51,13 +46,13 @@ class NeedsCreateView(LoginRequiredMixin, CreateView):
 
 class NeedsDetailView(DetailView):
 	model = Needs
-	template_name = "pages/needs_detail.html"
+	template_name = "need/needs_detail.html"
 	pk_url_kwarg = 'need_id'
 
 class NeedsUpdateView(UpdateView):
 	model = Needs
 	fields = ['title', 'description', "category", "id"]
-	template_name = "pages/needs_update.html"
+	template_name = "need/needs_update.html"
 	pk_url_kwarg = 'need_id'
 	success_url = reverse_lazy("needs-detail")
 
@@ -79,12 +74,12 @@ class NeedsDeleteView(LoginRequiredMixin, DeleteView):
 
 class NeedsList(ListView):
 	model = Needs
-	template_name = "pages/needs_list.html"
+	template_name = "need/needs_list.html"
 	queryset = Needs.objects.order_by("created_at")
 
 
 class SearchView(TemplateView):
-	template_name = 'pages/esearch.html'
+	template_name = 'pages/search.html'
 
 	def get_context_data(self, **kwargs):
 		page_number = self.request.GET.get('page','1')

@@ -1,7 +1,7 @@
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.contrib import auth, messages
 from django.contrib.auth import login, logout
@@ -11,9 +11,13 @@ from django.views.generic import FormView
 from django.contrib.auth.models import User as U
 from .. import forms
 
+def profile_view(request, nickname):
+	user_profile = U.objects.filter(nickname = nickname)
+	return render(request, "user/profile.html", {"user" : user_profile})
+
 # Create your views here.
 class RegisterView(FormView):
-    template_name = 'pages/register.html'
+    template_name = 'user/register.html'
     form_class = forms.RegisterForm
     success_url = reverse_lazy('home')
     
@@ -30,20 +34,23 @@ class RegisterView(FormView):
 
 
 class LoginView(FormView):
-    template_name = 'pages/login.html'
+    template_name = 'user/login.html'
     form_class = forms.LoginForm
     success_url = reverse_lazy('home')
     
     def form_valid(self, form):
         email = form.cleaned_data['email']
         password = form.cleaned_data['password']
-        user = auth.authenticate(email=email, password=password)
-        if user is not None:
-            auth.login(self.request, user)
-            return super().form_valid(form)
-        else:
-            messages.warning(self.request, '계정 혹은 비밀번호를 확인해 주세요')
-            return redirect(reverse('login'))
+        try :
+            user = U.objects.get(email=email)
+        except U.DoesNotExist:
+            pass
+        else :
+            if user.check_password(password):
+                login(self.request, user)
+                return super().form_valid(form)
+        messages.warning(self.request, '계정 혹은 비밀번호를 확인해 주세요')
+        return redirect(reverse('login'))
 
 def logout_view(request):
     logout(request)
