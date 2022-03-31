@@ -1,5 +1,6 @@
 {% extends "needs_base.html" %}
 {% load static %}
+{% load search_tags %}
 {% load description_masker %}
 {% block content %}
 
@@ -11,6 +12,7 @@
     </div>
 </header>
 <div class="container body-content">
+    {% redner_serach_bar %}
     <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
             <div style="display: flex;">

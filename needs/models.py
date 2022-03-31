@@ -23,11 +23,6 @@ class Needs(TimeStampedModel):
 	title = models.CharField(max_length=20, null=False)
 	description = models.TextField(null=True)
 	category = models.ForeignKey(Categories, on_delete=models.CASCADE, null=True)
-	# categorys = models.CharField(
-	# 	max_length=30,
-	# 	choices=Categorys.choices,
-	# 	default=Categorys.ETC,
-	# )
 	creator = models.ForeignKey(U,on_delete=models.CASCADE,null=True, related_name="creator")
 	like = models.ManyToManyField(U, null=True)
 	like_count = models.PositiveIntegerField(default=0)

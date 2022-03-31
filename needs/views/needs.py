@@ -88,6 +88,8 @@ class SearchView(TemplateView):
 		keyword = self.request.GET.get('keyword','')
 		category_id = self.request.GET.get("category")
 
+		category = None
+		
 		query_sets = Needs.objects.all().order_by("-created_at")
 		if keyword:
 			query_sets = query_sets.filter(Q(title__istartswith=keyword) | Q(description__istartswith=keyword))
@@ -97,10 +99,10 @@ class SearchView(TemplateView):
 		
 		needs = query_sets.all()
 		paginator = Paginator(needs, 12)
-		categories = Categories.objects.all()
 
 		paging = paginator.get_page(page_number)
 		return {
 			'paging' : paging,
-			'categories' : categories,
+			'selected_keyword' : keyword,
+			"selected_category" : category,
 		}
